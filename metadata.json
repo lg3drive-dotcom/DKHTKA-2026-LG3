@@ -1,0 +1,6 @@
+{
+  "name": "Portal TKA SDN Leuwigajah 3",
+  "description": "Aplikasi mandiri dan privat untuk memantau hasil Tes Kemampuan Akademik (TKA) tahun 2026 secara aman lengkap dengan rekapitulasi data kelas.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
