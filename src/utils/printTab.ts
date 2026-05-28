@@ -520,28 +520,18 @@ export function printAdminReportHTML(
                 class="max-w-full max-h-full object-contain"
               />
             </div>
-          </div>
-
-          <!-- Document Subtitle -->
-          <div class="text-center mb-8 font-serif">
-            <h2 class="text-base font-extrabold uppercase text-black leading-tight tracking-wider underline">
-              LAPORAN PRIVAT HASIL PENILAIAN EKSTREM TKA 2026
+                    <!-- Document Subtitle -->
+          <div class="text-center mb-6 font-serif">
+            <h2 class="text-xl font-extrabold uppercase text-black leading-tight tracking-wider underline">
+              Daftar Kolektif Hasil Tes Kemampuan Akademik
             </h2>
-            <div class="text-[10px] font-bold text-red-700 tracking-wide mt-1 uppercase">
-              REKAP KHUSUS AMBANG TERLUAR — BASHAN PRIVAT KEPALA INSTANSI
-            </div>
           </div>
 
           <!-- Metadata block -->
-          <div class="grid grid-cols-2 gap-4 text-xs font-serif text-black mb-6 pb-2 border-b border-gray-200">
-            <div class="space-y-1">
-              <div class="flex"><span class="w-28 text-gray-600 font-bold">Kota/Kabupaten</span> <span>: KOTA CIMAHI</span></div>
-              <div class="flex"><span class="w-28 text-gray-600 font-bold">Sekolah</span> <span>: SD NEGERI LEUWIGAJAH 3</span></div>
-              <div class="flex"><span class="w-28 text-gray-600 font-bold">Bahasan</span> <span class="font-bold">: ${subjectHeaderLabel}</span></div>
-            </div>
-            <div class="space-y-1 pl-12 text-right">
-              <div><span class="text-gray-600 font-bold">Tanggal Terbit :</span> cimahi, ${currentFormattedDate}</div>
-              <div><span class="text-gray-600 font-bold">Klasifikasi :</span> <strong class="text-red-700 uppercase font-extrabold font-serif">SANGAT RAHASIA / INTERN KEPALA SEKOLAH</strong></div>
+          <div class="text-xs font-serif text-black mb-6 pb-2 border-b border-gray-200">
+            <div class="space-y-1.5">
+              <div class="flex"><span class="w-32 text-gray-700 font-bold">Sekolah</span> <span>: SD NEGERI LEUWIGAJAH 3</span></div>
+              <div class="flex"><span class="w-32 text-gray-700 font-bold">Mata Pelajaran</span> <span class="font-bold">: ${subjectHeaderLabel}</span></div>
             </div>
           </div>
 
@@ -562,41 +552,20 @@ export function printAdminReportHTML(
               ${tableRowsHtml}
             </tbody>
           </table>
-
-          <!-- Analysis Block -->
-          <div class="border border-gray-400 bg-gray-50/50 p-4 rounded-xl text-xs font-serif text-black mb-8 space-y-2">
-            <h5 class="font-bold uppercase text-xs border-b border-gray-300 pb-1.5 mb-2 text-gray-800 flex items-center gap-1.5">
-              <span>📋</span> DIAGNOSIS AKADEMIK DARI SATUAN PENDIDIKAN
-            </h5>
-            <ol class="list-decimal pl-4 space-y-1.5 text-gray-800 leading-relaxed">
-              <li><strong>Kelompok Tertinggi (Performa OSN):</strong> Peserta didik Berkategori TERTINGGI direkomendasikan masuk program pengayaan intensif guna persiapan ajang sains nasional (OSN/O2SN).</li>
-              <li><strong>Kelompok Terendah (Remedial Terbimbing):</strong> Peserta didik Berkategori TERENDAH diwajibkan mengikuti program remedial terbimbing secara privat oleh wali kelas masing-masing.</li>
-              <li><strong>Klausul Kerahasiaan (PDP):</strong> Dokumen hasil rekap ini bersifat rahasia instansi dan dilarang disebarluaskan untuk menjaga stabilitas psikologis murid pendidik.</li>
-            </ol>
-          </div>
         </div>
 
-        <!-- Official Seal and Sign Stamp zone -->
-        <div class="mt-8 pt-4 border-t border-gray-100 flex items-end justify-between font-serif text-black text-xs">
-          <!-- Left institutional Stamp container seal template -->
-          <div class="border-2 border-blue-800 p-3 text-center text-blue-800 rounded-md w-48 font-bold text-[10px] leading-tight opacity-90">
-            <div class="border border-blue-800 p-2 space-y-1">
-              <div>KEMENTERIAN DIKDASMEN</div>
-              <div class="text-xs">SDN LEUWIGAJAH 3</div>
-              <div class="font-serif italic font-normal text-[9px] border-t border-blue-800 pt-1">TANDA TANGAN RESMI</div>
-            </div>
-          </div>
-
+        <!-- Official Sign zone -->
+        <div class="mt-8 pt-4 border-t border-gray-100 flex justify-end font-serif text-black text-xs">
           <!-- Right formal sign zone -->
           <div class="w-64 text-left">
             <div>Cimahi, ${currentFormattedDate}</div>
             <div class="mt-0.5">Mengetahui,</div>
             <div class="font-bold uppercase text-xs mt-0.5">Kepala Satuan Pendidikan</div>
-            <div class="h-12"></div> <!-- Seal / Write space -->
+            <div class="h-16"></div> <!-- Seal / Write space -->
             <div class="font-bold text-xs uppercase underline">TEDY RESNADI, S.H., S.Pd.</div>
             <div class="text-[10px] text-gray-800 mt-0.5">NIP. 197411272008011004</div>
           </div>
-        </div>
+        </div>       </div>
 
       </div>
 

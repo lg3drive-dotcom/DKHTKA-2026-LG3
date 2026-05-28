@@ -466,22 +466,20 @@ export async function generateAdminReportPDF(
   // Document Title
   doc.setFont("helvetica", "bold");
   doc.setFontSize(11);
-  doc.text("LAPORAN PRIVAT HASIL PENILAIAN EKSTREM TKA 2026", width / 2, 40, { align: "center" });
-  doc.setFontSize(9);
-  doc.setFont("helvetica", "normal");
-  
-  let subText = "Bahan Evaluasi Khusus Pendidik & Kepala Sekolah";
-  if (subjectType === "matematika") subText = "Bahasan Khusus: Mata Pelajaran Matematika";
-  else if (subjectType === "bahasaIndonesia") subText = "Bahasan Khusus: Mata Pelajaran Bahasa Indonesia";
-  doc.text(subText, width / 2, 44.5, { align: "center" });
+  doc.text("DAFTAR KOLEKTIF HASIL TES KEMAMPUAN AKADEMIK", width / 2, 40, { align: "center" });
 
   // Draw metadata block
-  const metaY = 52;
-  doc.setFontSize(8);
-  doc.text("Kabupaten/Kota  :  KOTA CIMAHI", 15, metaY);
-  doc.text("Sekolah                  :  SD NEGERI LEUWIGAJAH 3", 15, metaY + 4);
-  doc.text("Tanggal Keluar      :  28 Mei 2026", width - 75, metaY);
-  doc.text("Status Akses         :  RAHASIA / INTERNAL", width - 75, metaY + 4);
+  const metaY = 49;
+  doc.setFontSize(8.5);
+  doc.setFont("helvetica", "bold");
+  doc.text("Sekolah                  :  SD NEGERI LEUWIGAJAH 3", 15, metaY);
+  
+  const subjectDisplay = subjectType === "matematika" 
+    ? "MATEMATIKA" 
+    : subjectType === "bahasaIndonesia" 
+      ? "BAHASA INDONESIA" 
+      : "MATEMATIKA & BAHASA INDONESIA";
+  doc.text("Mata Pelajaran      :  " + subjectDisplay, 15, metaY + 4.5);
 
   // Gather extreme students dynamically
   let mathMaxScore = stats.matMax;
@@ -549,7 +547,7 @@ export async function generateAdminReportPDF(
   }
 
   // Draw Table for extreme scores
-  let tableY = 64;
+  let tableY = 59;
   const thHeight = 8;
   const trHeight = 7.5;
 
@@ -646,7 +644,7 @@ export async function generateAdminReportPDF(
 
     // Inner separators
     doc.line(colX.category, currentY, colX.category, currentY + trHeight);
-    doc.line(colX.subject, currentY, currentY, currentY + trHeight);
+    doc.line(colX.subject, currentY, colX.subject, currentY + trHeight);
     doc.line(colX.nama, currentY, colX.nama, currentY + trHeight);
     doc.line(colX.nisn, currentY, colX.nisn, currentY + trHeight);
     doc.line(colX.score, currentY, colX.score, currentY + trHeight);
@@ -655,37 +653,8 @@ export async function generateAdminReportPDF(
     currentY += trHeight;
   });
 
-  // Descriptive analysis block below the grid
-  currentY += 8;
-  doc.setDrawColor(200, 200, 200);
-  doc.setFillColor(252, 252, 252);
-  doc.rect(14, currentY, width - 28, 30, "F");
-  doc.rect(14, currentY, width - 28, 30, "S");
-
-  doc.setFont("helvetica", "bold");
-  doc.setFontSize(8.5);
-  doc.text("DIAGNOSIS AKADEMIK DARI SATUAN PENDIDIKAN", 18, currentY + 5.5);
-  
-  doc.setFont("helvetica", "normal");
-  doc.setFontSize(7.5);
-  doc.text(
-    "1. Peserta didik Berkategori TERTINGGI direkomendasikan masuk program pengayaan intensif guna persiapan ajang sains nasional (OSN).",
-    18,
-    currentY + 11.5
-  );
-  doc.text(
-    "2. Peserta didik Berkategori TERENDAH diwajibkan mengikuti program remidial terbimbing secara privat oleh wali kelas masing-masing.",
-    18,
-    currentY + 17.5
-  );
-  doc.text(
-    "3. Dokumen hasil rekap ini bersifat konfidensial dan dilarang disebarluaskan untuk menjaga stabilitas psikologi anak didik.",
-    18,
-    currentY + 23.5
-  );
-
   // Bottom Signature Row
-  const sigY = currentY + 42;
+  const sigY = currentY + 12;
   
   const currentDate = new Date();
   const formatIndID = currentDate.toLocaleDateString("id-ID", {
@@ -705,17 +674,6 @@ export async function generateAdminReportPDF(
   doc.setFontSize(8);
   doc.text("NIP. 197411272008011004", width - 75, sigY + 31);
   doc.line(width - 75, sigY + 28, width - 15, sigY + 28);
-
-  // Left stamp placeholder
-  doc.setDrawColor(0, 50, 150);
-  doc.setLineWidth(0.3);
-  doc.rect(20, sigY, 40, 24, "S");
-  doc.setFont("helvetica", "bold");
-  doc.setFontSize(7.5);
-  doc.text("KEMENTERIAN DIKDASMEN", 40, sigY + 7, { align: "center" });
-  doc.text("SDN LEUWIGAJAH 3", 40, sigY + 13, { align: "center" });
-  doc.setFont("helvetica", "normal");
-  doc.text("TANDA TANGAN SAH", 40, sigY + 19, { align: "center" });
 
   // Footer document sign
   doc.setFont("helvetica", "bold");
