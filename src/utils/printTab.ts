@@ -520,7 +520,9 @@ export function printAdminReportHTML(
                 class="max-w-full max-h-full object-contain"
               />
             </div>
-                    <!-- Document Subtitle -->
+          </div>
+
+          <!-- Document Subtitle -->
           <div class="text-center mb-6 font-serif">
             <h2 class="text-xl font-extrabold uppercase text-black leading-tight tracking-wider underline">
               Daftar Kolektif Hasil Tes Kemampuan Akademik
@@ -565,7 +567,7 @@ export function printAdminReportHTML(
             <div class="font-bold text-xs uppercase underline">TEDY RESNADI, S.H., S.Pd.</div>
             <div class="text-[10px] text-gray-800 mt-0.5">NIP. 197411272008011004</div>
           </div>
-        </div>       </div>
+        </div>
 
       </div>
 
