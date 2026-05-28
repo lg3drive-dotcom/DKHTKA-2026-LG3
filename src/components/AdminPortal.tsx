@@ -19,8 +19,10 @@ import {
   Eye, 
   Award,
   AlertTriangle,
-  Info 
+  Info,
+  Printer
 } from "lucide-react";
+import { printAdminReportHTML } from "../utils/printTab";
 import { motion } from "motion/react";
 
 export default function AdminPortal() {
@@ -193,72 +195,99 @@ export default function AdminPortal() {
         </div>
 
         {/* Action button downloads list */}
-        <div className="grid grid-cols-1 gap-2.5">
+        <div className="grid grid-cols-1 gap-3">
           {/* Download 1: Matematika */}
-          <button
-            onClick={() => handleDownload("mat")}
-            disabled={isDownloading !== null}
-            className="w-full py-3.5 px-4 bg-slate-950 hover:bg-slate-950/80 text-white rounded-2xl flex items-center justify-between border border-slate-800 hover:border-emerald-500/20 transition-all cursor-pointer disabled:opacity-50"
-          >
-            <div className="flex items-center gap-3">
-              <div className="p-2 bg-emerald-500/10 text-emerald-400 rounded-lg">
-                {isDownloading === "mat" ? (
-                  <Loader2 className="w-4 h-4 animate-spin" />
-                ) : (
-                  <Award className="w-4 h-4" />
-                )}
+          <div className="flex gap-2.5 w-full">
+            <button
+              onClick={() => handleDownload("mat")}
+              disabled={isDownloading !== null}
+              className="flex-1 py-3.5 px-4 bg-slate-950 hover:bg-slate-950/80 text-white rounded-2xl flex items-center justify-between border border-slate-800 hover:border-emerald-500/20 transition-all cursor-pointer disabled:opacity-50"
+            >
+              <div className="flex items-center gap-3">
+                <div className="p-2 bg-emerald-500/10 text-emerald-400 rounded-lg">
+                  {isDownloading === "mat" ? (
+                    <Loader2 className="w-4 h-4 animate-spin" />
+                  ) : (
+                    <Award className="w-4 h-4" />
+                  )}
+                </div>
+                <div className="text-left">
+                  <span className="text-xs font-bold block">Dokumen Ekstrem Matematika</span>
+                  <span className="text-[9px] text-slate-500 font-semibold uppercase">PDF - Resmi Kop Kedinasan</span>
+                </div>
               </div>
-              <div className="text-left">
-                <span className="text-xs font-bold block">Dokumen Ekstrem Matematika</span>
-                <span className="text-[9px] text-slate-500 font-semibold uppercase">PDF - Resmi Kop Kedinasan</span>
-              </div>
-            </div>
-            <FileDown className="w-4 h-4 text-emerald-400 shrink-0" />
-          </button>
+              <FileDown className="w-4 h-4 text-emerald-400 shrink-0" />
+            </button>
+            <button
+              onClick={() => printAdminReportHTML("matematika", stats)}
+              className="px-4.5 bg-slate-950 hover:bg-slate-900 border border-slate-800 hover:border-emerald-500/30 rounded-2xl flex items-center justify-center text-emerald-400 cursor-pointer transition-all shrink-0"
+              title="Cetak Laporan Matematika (Tab Baru)"
+            >
+              <Printer className="w-4.5 h-4.5" />
+            </button>
+          </div>
 
           {/* Download 2: Bahasa Indonesia */}
-          <button
-            onClick={() => handleDownload("indo")}
-            disabled={isDownloading !== null}
-            className="w-full py-3.5 px-4 bg-slate-950 hover:bg-slate-950/80 text-white rounded-2xl flex items-center justify-between border border-slate-800 hover:border-sky-500/20 transition-all cursor-pointer disabled:opacity-50"
-          >
-            <div className="flex items-center gap-3">
-              <div className="p-2 bg-sky-500/10 text-sky-400 rounded-lg">
-                {isDownloading === "indo" ? (
-                  <Loader2 className="w-4 h-4 animate-spin" />
-                ) : (
-                  <Award className="w-4 h-4" />
-                )}
+          <div className="flex gap-2.5 w-full">
+            <button
+              onClick={() => handleDownload("indo")}
+              disabled={isDownloading !== null}
+              className="flex-1 py-3.5 px-4 bg-slate-950 hover:bg-slate-950/80 text-white rounded-2xl flex items-center justify-between border border-slate-800 hover:border-sky-500/20 transition-all cursor-pointer disabled:opacity-50"
+            >
+              <div className="flex items-center gap-3">
+                <div className="p-2 bg-sky-500/10 text-sky-400 rounded-lg">
+                  {isDownloading === "indo" ? (
+                    <Loader2 className="w-4 h-4 animate-spin" />
+                  ) : (
+                    <Award className="w-4 h-4" />
+                  )}
+                </div>
+                <div className="text-left">
+                  <span className="text-xs font-bold block">Dokumen Ekstrem B. Indonesia</span>
+                  <span className="text-[9px] text-slate-500 font-semibold uppercase">PDF - Resmi Kop Kedinasan</span>
+                </div>
               </div>
-              <div className="text-left">
-                <span className="text-xs font-bold block">Dokumen Ekstrem B. Indonesia</span>
-                <span className="text-[9px] text-slate-500 font-semibold uppercase">PDF - Resmi Kop Kedinasan</span>
-              </div>
-            </div>
-            <FileDown className="w-4 h-4 text-sky-400 shrink-0" />
-          </button>
+              <FileDown className="w-4 h-4 text-sky-400 shrink-0" />
+            </button>
+            <button
+              onClick={() => printAdminReportHTML("bahasaIndonesia", stats)}
+              className="px-4.5 bg-slate-950 hover:bg-slate-900 border border-slate-800 hover:border-sky-500/30 rounded-2xl flex items-center justify-center text-sky-400 cursor-pointer transition-all shrink-0"
+              title="Cetak Laporan B. Indonesia (Tab Baru)"
+            >
+              <Printer className="w-4.5 h-4.5" />
+            </button>
+          </div>
 
           {/* Download 3: Combined Both */}
-          <button
-            onClick={() => handleDownload("both")}
-            disabled={isDownloading !== null}
-            className="w-full py-3.5 px-4 bg-gradient-to-r from-indigo-950 to-slate-950 hover:from-indigo-900/60 hover:to-slate-950 text-white rounded-2xl flex items-center justify-between border border-indigo-900/40 hover:border-indigo-500/30 transition-all cursor-pointer disabled:opacity-50"
-          >
-            <div className="flex items-center gap-3">
-              <div className="p-2 bg-indigo-500/10 text-indigo-400 rounded-lg">
-                {isDownloading === "both" ? (
-                  <Loader2 className="w-4 h-4 animate-spin" />
-                ) : (
-                  <Sparkles className="w-4 h-4" />
-                )}
+          <div className="flex gap-2.5 w-full">
+            <button
+              onClick={() => handleDownload("both")}
+              disabled={isDownloading !== null}
+              className="flex-1 py-3.5 px-4 bg-gradient-to-r from-indigo-950 to-slate-950 hover:from-indigo-900/60 hover:to-slate-950 text-white rounded-2xl flex items-center justify-between border border-indigo-900/40 hover:border-indigo-500/30 transition-all cursor-pointer disabled:opacity-50"
+            >
+              <div className="flex items-center gap-3">
+                <div className="p-2 bg-indigo-500/10 text-indigo-400 rounded-lg">
+                  {isDownloading === "both" ? (
+                    <Loader2 className="w-4 h-4 animate-spin" />
+                  ) : (
+                    <Sparkles className="w-4 h-4" />
+                  )}
+                </div>
+                <div className="text-left">
+                  <span className="text-xs font-bold block">Dokumen Gabungan Ekstrem Kelas</span>
+                  <span className="text-[9px] text-indigo-400 font-extrabold uppercase">Instansi - Komprehensif</span>
+                </div>
               </div>
-              <div className="text-left">
-                <span className="text-xs font-bold block">Dokumen Gabungan Ekstrem Kelas</span>
-                <span className="text-[9px] text-indigo-400 font-extrabold uppercase">Instansi - Komprehensif</span>
-              </div>
-            </div>
-            <FileDown className="w-4 h-4 text-indigo-400 shrink-0" />
-          </button>
+              <FileDown className="w-4 h-4 text-indigo-400 shrink-0" />
+            </button>
+            <button
+              onClick={() => printAdminReportHTML("both", stats)}
+              className="px-4.5 bg-slate-950 hover:bg-slate-900 border border-slate-900/40 hover:border-indigo-500/30 rounded-2xl flex items-center justify-center text-indigo-400 cursor-pointer transition-all shrink-0 mt-0"
+              title="Cetak Laporan Gabungan (Tab Baru)"
+            >
+              <Printer className="w-4.5 h-4.5" />
+            </button>
+          </div>
         </div>
 
         {/* 

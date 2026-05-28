@@ -22,8 +22,10 @@ import {
   BookOpen, 
   Sparkles,
   TrendingUp,
-  RefreshCw
+  RefreshCw,
+  Printer
 } from "lucide-react";
+import { printStudentReportHTML } from "../utils/printTab";
 
 export default function PrivatePortal() {
   const [nama, setNama] = useState("");
@@ -350,15 +352,25 @@ export default function PrivatePortal() {
               </div>
             </div>
 
-            {/* Print Certificate button */}
-            <button
-              onClick={handleExportPDF}
-              disabled={isExporting}
-              className="w-full py-3.5 bg-sky-600 hover:bg-sky-500 text-white font-extrabold text-xs uppercase tracking-wider rounded-xl shadow-lg shadow-sky-950/30 flex items-center justify-center gap-2 cursor-pointer transition active:scale-[0.98]"
-            >
-              <Download className={`w-4 h-4 ${isExporting ? "animate-spin" : ""}`} />
-              {isExporting ? "Membuat PDF..." : "Ekspor Hasil TKA Mandiri (PDF)"}
-            </button>
+            {/* Actions: Export PDF & Print HTML in New Tab */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-3 pb-1" id="private-actions-group">
+              <button
+                onClick={handleExportPDF}
+                disabled={isExporting}
+                className="w-full py-3.5 bg-sky-600 hover:bg-sky-500 disabled:bg-slate-700 disabled:text-slate-500 text-white font-extrabold text-xs uppercase tracking-wider rounded-xl shadow-lg shadow-sky-950/35 flex items-center justify-center gap-2 cursor-pointer transition active:scale-[0.98]"
+              >
+                <Download className={`w-4 h-4 ${isExporting ? "animate-spin" : ""}`} />
+                {isExporting ? "Membuat PDF..." : "Unduh File PDF"}
+              </button>
+
+              <button
+                onClick={() => matchedStudent && printStudentReportHTML(matchedStudent, stats)}
+                className="w-full py-3.5 bg-slate-900 hover:bg-slate-800 text-white font-extrabold text-xs uppercase tracking-wider rounded-xl shadow-lg border border-slate-750 hover:border-slate-700 flex items-center justify-center gap-2 cursor-pointer transition active:scale-[0.98]"
+              >
+                <Printer className="w-4 h-4 text-sky-400" />
+                Cetak di Tab Baru
+              </button>
+            </div>
           </motion.div>
         )}
       </AnimatePresence>
