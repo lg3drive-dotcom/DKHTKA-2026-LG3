@@ -123,10 +123,10 @@ export function generateStudentPDF(student: StudentRecord, stats: ClassStats) {
     doc.text("NPSN", metaRightX, metaY);
     doc.text(":  20224242", metaRightColsX, metaY);
     
-    doc.text("Kepala Satuan Pendidikan", metaRightX, metaY + metaLineHeight);
+    doc.text("Kepala Sekolah", metaRightX, metaY + metaLineHeight);
     doc.text(":  TEDY RESNADI, S.H., S.Pd.", metaRightColsX, metaY + metaLineHeight);
     
-    doc.text("NIP Kepala Satuan Pend.", metaRightX, metaY + (metaLineHeight * 2));
+    doc.text("NIP Kepala Sekolah", metaRightX, metaY + (metaLineHeight * 2));
     doc.text(":  197411272008011004", metaRightColsX, metaY + (metaLineHeight * 2));
 
     // Page Specific index limits
@@ -324,7 +324,7 @@ export function generateStudentPDF(student: StudentRecord, stats: ClassStats) {
     doc.text("Mengetahui,", rightSignAlignX, sigY + 4.5);
     
     doc.setFont("helvetica", "bold");
-    doc.text("Kepala Satuan Pendidikan", rightSignAlignX, sigY + 9);
+    doc.text("Kepala Sekolah", rightSignAlignX, sigY + 9);
     
     // Principal name line & NIP
     doc.text("TEDY RESNADI, S.H., S.Pd.", rightSignAlignX, sigY + 26);
@@ -667,7 +667,7 @@ export async function generateAdminReportPDF(
   doc.text(`Cimahi, ${formatIndID}`, width - 75, sigY);
   doc.text("Mengetahui,", width - 75, sigY + 4.5);
   doc.setFont("helvetica", "bold");
-  doc.text("Kepala Satuan Pendidikan,", width - 75, sigY + 9);
+  doc.text("Kepala Sekolah,", width - 75, sigY + 9);
   
   doc.text("TEDY RESNADI, S.H., S.Pd.", width - 75, sigY + 27);
   doc.setFont("helvetica", "normal");

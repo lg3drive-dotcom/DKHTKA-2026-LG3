@@ -135,7 +135,7 @@ export function printStudentReportHTML(student: StudentRecord, stats: ClassStats
             </div>
             <div class="space-y-1 pl-12">
               <div class="flex"><span class="w-40 font-bold">NPSN</span> <span>: 20224242</span></div>
-              <div class="flex"><span class="w-40 font-bold">Kepala Satuan Pendidikan</span> <span>: TEDY RESNADI, S.H., S.Pd.</span></div>
+              <div class="flex"><span class="w-40 font-bold">Kepala Sekolah</span> <span>: TEDY RESNADI, S.H., S.Pd.</span></div>
               <div class="flex"><span class="w-40 font-bold">NIP Kepala Sekolah</span> <span>: 197411272008011004</span></div>
             </div>
           </div>
@@ -187,9 +187,9 @@ export function printStudentReportHTML(student: StudentRecord, stats: ClassStats
           <div class="text-xs font-serif text-black w-64 text-left">
             <div>Cimahi, ${currentFormattedDate}</div>
             <div class="mt-0.5">Mengetahui,</div>
-            <div class="font-bold uppercase text-xs mt-0.5">Kepala Satuan Pendidikan</div>
+            <div class="font-bold uppercase text-xs mt-0.5">Kepala Sekolah</div>
             <div class="h-10"></div> <!-- space for signature -->
-            <div class="font-bold text-xs uppercase underline">TEDY RESNADI, S.H., S.Pd.</div>
+            <div class="font-bold text-xs underline">TEDY RESNADI, S.H., S.Pd.</div>
             <div class="text-[10px] mt-0.5 text-gray-850">NIP. 197411272008011004</div>
           </div>
         </div>
@@ -403,10 +403,10 @@ export function printAdminReportHTML(
   });
 
   const subjectHeaderLabel = subjectType === "matematika" 
-    ? "MATA PELAJARAN: MATEMATIKA" 
+    ? "MATEMATIKA" 
     : subjectType === "bahasaIndonesia" 
-      ? "MATA PELAJARAN: BAHASA INDONESIA" 
-      : "SELURUH MATA EVALUASI (GABUNGAN)";
+      ? "BAHASA INDONESIA" 
+      : "MATEMATIKA & BAHASA INDONESIA";
 
   const htmlContent = `
     <!DOCTYPE html>
@@ -562,9 +562,9 @@ export function printAdminReportHTML(
           <div class="w-64 text-left">
             <div>Cimahi, ${currentFormattedDate}</div>
             <div class="mt-0.5">Mengetahui,</div>
-            <div class="font-bold uppercase text-xs mt-0.5">Kepala Satuan Pendidikan</div>
+            <div class="font-bold uppercase text-xs mt-0.5">Kepala Sekolah</div>
             <div class="h-16"></div> <!-- Seal / Write space -->
-            <div class="font-bold text-xs uppercase underline">TEDY RESNADI, S.H., S.Pd.</div>
+            <div class="font-bold text-xs underline">TEDY RESNADI, S.H., S.Pd.</div>
             <div class="text-[10px] text-gray-800 mt-0.5">NIP. 197411272008011004</div>
           </div>
         </div>
