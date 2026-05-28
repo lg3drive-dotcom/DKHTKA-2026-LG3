@@ -23,6 +23,7 @@ import {
   Printer
 } from "lucide-react";
 import { printAdminReportHTML } from "../utils/printTab";
+import { generateDKHTKAExcel } from "../utils/excelGenerator";
 import { motion } from "motion/react";
 
 export default function AdminPortal() {
@@ -286,6 +287,25 @@ export default function AdminPortal() {
               title="Cetak Laporan Gabungan (Tab Baru)"
             >
               <Printer className="w-4.5 h-4.5" />
+            </button>
+          </div>
+
+          {/* Download 4: Excel format kolektif (DKHTKA) */}
+          <div className="flex gap-2.5 w-full">
+            <button
+              onClick={generateDKHTKAExcel}
+              className="flex-1 py-3.5 px-4 bg-emerald-950/40 hover:bg-emerald-950/60 text-white rounded-2xl flex items-center justify-between border border-emerald-900/40 hover:border-emerald-500/30 transition-all cursor-pointer"
+            >
+              <div className="flex items-center gap-3">
+                <div className="p-2 bg-emerald-500/10 text-emerald-400 rounded-lg">
+                  <FileDown className="w-4 h-4" />
+                </div>
+                <div className="text-left">
+                  <span className="text-xs font-bold block">Unduh Format Excel (DKHTKA)</span>
+                  <span className="text-[9px] text-emerald-500 font-extrabold uppercase">Sesuai Format Resmi Sekolah (.xls)</span>
+                </div>
+              </div>
+              <FileDown className="w-4 h-4 text-emerald-400 shrink-0" />
             </button>
           </div>
         </div>
