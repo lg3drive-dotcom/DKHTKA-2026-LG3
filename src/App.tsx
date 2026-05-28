@@ -7,11 +7,12 @@ import React, { useState } from "react";
 import Header from "./components/Header";
 import PrivatePortal from "./components/PrivatePortal";
 import CollectiveDashboard from "./components/CollectiveDashboard";
+import AdminPortal from "./components/AdminPortal";
 import { Lock, BarChart2, BookOpen, Heart, ShieldAlert } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
 
 export default function App() {
-  const [activeTab, setActiveTab] = useState<"private" | "collective">("private");
+  const [activeTab, setActiveTab] = useState<"private" | "collective" | "admin">("private");
 
   return (
     <div className="bg-slate-950 min-h-screen text-slate-100 flex flex-col items-center">
@@ -43,25 +44,37 @@ export default function App() {
           </div>
 
           <AnimatePresence mode="wait">
-            {activeTab === "private" ? (
+            {activeTab === "private" && (
               <motion.div
                 key="private-view"
                 initial={{ opacity: 0, x: -10 }}
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0, x: 10 }}
-                transition={{ duration: 0.2 }}
+                transition={{ duration: 0.15 }}
               >
                 <PrivatePortal />
               </motion.div>
-            ) : (
+            )}
+            {activeTab === "collective" && (
               <motion.div
                 key="collective-view"
                 initial={{ opacity: 0, x: 10 }}
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0, x: -10 }}
-                transition={{ duration: 0.2 }}
+                transition={{ duration: 0.15 }}
               >
                 <CollectiveDashboard />
+              </motion.div>
+            )}
+            {activeTab === "admin" && (
+              <motion.div
+                key="admin-view"
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ duration: 0.15 }}
+              >
+                <AdminPortal />
               </motion.div>
             )}
           </AnimatePresence>
@@ -69,37 +82,52 @@ export default function App() {
         </main>
 
         {/* Navigation bar positioned at the bottom of the container */}
-        <div className="absolute bottom-0 left-0 right-0 bg-slate-900/90 border-t border-slate-800 shadow-xl px-6 py-3 z-40 sticky backdrop-blur-md">
-          <div className="flex items-center justify-around bg-slate-950/80 border border-slate-800 p-1.5 rounded-2xl">
+        <div className="absolute bottom-0 left-0 right-0 bg-slate-900/90 border-t border-slate-800 shadow-xl px-4 py-3 z-40 sticky backdrop-blur-md">
+          <div className="flex items-center justify-around bg-slate-950/80 border border-slate-800 p-1 rounded-2xl">
             
             {/* Tab 1: Hasil Mandiri */}
             <button
               onClick={() => setActiveTab("private")}
-              className={`flex-1 flex flex-col items-center gap-1.5 py-2.5 rounded-xl transition-all cursor-pointer ${
-                activeTab === "private" ? "text-white font-extrabold scale-102" : "text-slate-500 hover:text-slate-300"
+              className={`flex-1 flex flex-col items-center gap-1 py-1.5 rounded-xl transition-all cursor-pointer ${
+                activeTab === "private" ? "text-white font-extrabold" : "text-slate-500 hover:text-slate-300"
               }`}
             >
-              <div className={`p-1.5 rounded-lg transition-colors ${
+              <div className={`p-1 px-3 rounded-lg transition-colors ${
                 activeTab === "private" ? "bg-sky-500/20 text-sky-400" : "bg-transparent text-slate-500"
               }`}>
-                <Lock className="w-4.5 h-4.5" />
+                <Lock className="w-4 h-4 mx-auto" />
               </div>
-              <span className="text-[10px] tracking-tight font-bold">Hasil Mandiri</span>
+              <span className="text-[9px] tracking-tight font-bold">Hasil Mandiri</span>
             </button>
 
             {/* Tab 2: Evaluasi Kelas */}
             <button
               onClick={() => setActiveTab("collective")}
-              className={`flex-1 flex flex-col items-center gap-1.5 py-2.5 rounded-xl transition-all cursor-pointer ${
-                activeTab === "collective" ? "text-white font-extrabold scale-102" : "text-slate-500 hover:text-slate-300"
+              className={`flex-1 flex flex-col items-center gap-1 py-1.5 rounded-xl transition-all cursor-pointer ${
+                activeTab === "collective" ? "text-white font-extrabold" : "text-slate-500 hover:text-slate-300"
               }`}
             >
-              <div className={`p-1.5 rounded-lg transition-colors ${
+              <div className={`p-1 px-3 rounded-lg transition-colors ${
                 activeTab === "collective" ? "bg-sky-500/20 text-sky-400" : "bg-transparent text-slate-500"
               }`}>
-                <BarChart2 className="w-4.5 h-4.5" />
+                <BarChart2 className="w-4 h-4 mx-auto" />
               </div>
-              <span className="text-[10px] tracking-tight font-bold">Evaluasi Kelas</span>
+              <span className="text-[9px] tracking-tight font-bold">Evaluasi Kelas</span>
+            </button>
+
+            {/* Tab 3: Akses Admin */}
+            <button
+              onClick={() => setActiveTab("admin")}
+              className={`flex-1 flex flex-col items-center gap-1 py-1.5 rounded-xl transition-all cursor-pointer ${
+                activeTab === "admin" ? "text-white font-extrabold" : "text-slate-500 hover:text-slate-300"
+              }`}
+            >
+              <div className={`p-1 px-3 rounded-lg transition-colors ${
+                activeTab === "admin" ? "bg-indigo-500/20 text-indigo-400" : "bg-transparent text-slate-500"
+              }`}>
+                <ShieldAlert className="w-4 h-4 mx-auto" />
+              </div>
+              <span className="text-[9px] tracking-tight font-bold">Akses Admin</span>
             </button>
 
           </div>
