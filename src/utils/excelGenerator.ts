@@ -47,8 +47,18 @@ export function generateDKHTKAExcel() {
   // Rows for student records
   STUDENT_RECORDS.forEach((student) => {
     const ttl = `${student.tempatLahir.toUpperCase()}, ${student.tanggalLahirStr.toUpperCase()}`;
-    const matScoreStr = `${student.matematika.toFixed(2)} (${student.matematikaKet})`;
-    const indoScoreStr = `${student.bahasaIndonesia.toFixed(2)} (${student.bahasaIndonesiaKet})`;
+    
+    const matCell = {
+      v: student.matematika,
+      t: "n",
+      z: `0.00" (${student.matematikaKet})"`
+    };
+
+    const indoCell = {
+      v: student.bahasaIndonesia,
+      t: "n",
+      z: `0.00" (${student.bahasaIndonesiaKet})"`
+    };
 
     data.push([
       student.no,             // Column A: No
@@ -56,8 +66,8 @@ export function generateDKHTKAExcel() {
       student.nisn,           // Column C: NISN
       student.nama.toUpperCase(), // Column D: Nama Peserta
       ttl,                    // Column E: Tempat, Tanggal Lahir
-      matScoreStr,            // Column F: Matematika
-      indoScoreStr,           // Column G: Bahasa Indonesia
+      matCell,                // Column F: Matematika
+      indoCell,               // Column G: Bahasa Indonesia
       ""                      // Column H: Keterangan
     ]);
   });
