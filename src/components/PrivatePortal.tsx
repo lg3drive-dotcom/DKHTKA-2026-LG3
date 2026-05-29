@@ -23,7 +23,9 @@ import {
   Sparkles,
   TrendingUp,
   RefreshCw,
-  Printer
+  Printer,
+  Trophy,
+  Award
 } from "lucide-react";
 import { printStudentReportHTML } from "../utils/printTab";
 
@@ -34,6 +36,7 @@ export default function PrivatePortal() {
   const [errorMsg, setErrorMsg] = useState("");
   const [successMsg, setSuccessMsg] = useState("");
   const [isExporting, setIsExporting] = useState(false);
+  const [showRankings, setShowRankings] = useState(false);
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
@@ -96,6 +99,7 @@ export default function PrivatePortal() {
     setMatchedStudent(null);
     setErrorMsg("");
     setSuccessMsg("");
+    setShowRankings(false);
   };
 
   const handleExportPDF = () => {
@@ -113,6 +117,20 @@ export default function PrivatePortal() {
   };
 
   const stats = getStats();
+
+  let matRank = 0;
+  let indoRank = 0;
+  let totalStudentsCount = 0;
+  let isMatHighest = false;
+  let isIndoHighest = false;
+
+  if (matchedStudent) {
+    totalStudentsCount = STUDENT_RECORDS.length;
+    matRank = STUDENT_RECORDS.filter(s => s.matematika > matchedStudent.matematika).length + 1;
+    indoRank = STUDENT_RECORDS.filter(s => s.bahasaIndonesia > matchedStudent.bahasaIndonesia).length + 1;
+    isMatHighest = matchedStudent.matematika === Math.max(...STUDENT_RECORDS.map(s => s.matematika));
+    isIndoHighest = matchedStudent.bahasaIndonesia === Math.max(...STUDENT_RECORDS.map(s => s.bahasaIndonesia));
+  }
 
   return (
     <div className="space-y-5">
@@ -351,6 +369,113 @@ export default function PrivatePortal() {
                 </div>
               </div>
             </div>
+
+            {/* Interactive Ranking Check Module */}
+            {!showRankings ? (
+              <div className="bg-slate-800 border border-slate-700/80 rounded-[1.8rem] p-4 flex flex-col gap-3">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2">
+                    <Trophy className="w-4.5 h-4.5 text-amber-400" />
+                    <h4 className="text-[10px] font-bold text-white uppercase tracking-wider">Cek Urutan Nilai Siswa</h4>
+                  </div>
+                  <span className="text-[8px] font-extrabold uppercase bg-amber-500/15 text-amber-400 px-2 py-0.5 rounded-full border border-amber-500/10">
+                    Sistem Urutan
+                  </span>
+                </div>
+                <p className="text-[10px] text-slate-400 leading-relaxed font-semibold">
+                  Ketahui posisi urutan nilai Anda di antara seluruh <strong>{totalStudentsCount} siswa</strong> di SD Negeri Leuwigajah 3.
+                </p>
+                <button
+                  onClick={() => setShowRankings(true)}
+                  className="w-full py-2.5 bg-gradient-to-r from-amber-600 to-amber-500 hover:from-amber-500 hover:to-amber-400 text-white font-extrabold text-[10px] uppercase tracking-wider rounded-xl transition duration-200 shadow-md shadow-amber-950/20 flex items-center justify-center gap-2 cursor-pointer active:scale-[0.98]"
+                >
+                  <Trophy className="w-3.5 h-3.5 text-white" />
+                  Cek Urutan Nilai Saya
+                </button>
+              </div>
+            ) : (
+              <motion.div
+                initial={{ opacity: 0, scale: 0.98 }}
+                animate={{ opacity: 1, scale: 1 }}
+                className="bg-slate-800 border border-slate-700/80 rounded-[1.8rem] p-4 space-y-3.5 overflow-hidden"
+              >
+                <div className="flex items-center justify-between pb-2.5 border-b border-slate-700/50">
+                  <div className="flex items-center gap-2">
+                    <Trophy className="w-4 h-4 text-amber-405 shrink-0" />
+                    <h4 className="text-[10px] font-bold text-white uppercase tracking-wider">Hasil Urutan Nilai Siswa</h4>
+                  </div>
+                  <button
+                    onClick={() => setShowRankings(false)}
+                    className="text-[9px] font-extrabold uppercase bg-slate-900 border border-slate-700 hover:bg-slate-750 text-slate-300 px-2.5 py-1 rounded-lg transition cursor-pointer"
+                  >
+                    Sembunyikan
+                  </button>
+                </div>
+
+                <div className="grid grid-cols-2 gap-3">
+                  {/* Matematika Rank */}
+                  <div className="bg-slate-950/50 border border-slate-800/80 rounded-xl p-3 flex items-center gap-2.5">
+                    <div className="w-9 h-9 rounded-lg bg-sky-500/15 text-sky-450 flex items-center justify-center shrink-0 border border-sky-500/10 text-xs font-black">
+                      #{matRank}
+                    </div>
+                    <div>
+                      <span className="text-[7.5px] font-extrabold uppercase tracking-widest text-slate-500 block">Matematika</span>
+                      <span className="text-[11px] font-extrabold text-white block leading-tight">Urutan Ke-{matRank}</span>
+                      <span className="text-[8.5px] text-slate-400 block mt-0.5">dari {totalStudentsCount} siswa</span>
+                    </div>
+                  </div>
+
+                  {/* Bahasa Indonesia Rank */}
+                  <div className="bg-slate-950/50 border border-slate-800/80 rounded-xl p-3 flex items-center gap-2.5">
+                    <div className="w-9 h-9 rounded-lg bg-indigo-500/15 text-indigo-455 flex items-center justify-center shrink-0 border border-indigo-500/10 text-xs font-black">
+                      #{indoRank}
+                    </div>
+                    <div>
+                      <span className="text-[7.5px] font-extrabold uppercase tracking-widest text-slate-500 block">B. Indonesia</span>
+                      <span className="text-[11px] font-extrabold text-white block leading-tight">Urutan Ke-{indoRank}</span>
+                      <span className="text-[8.5px] text-slate-400 block mt-0.5">dari {totalStudentsCount} siswa</span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Display direct congratulatory notices of highest scores if applicable */}
+                {(isMatHighest || isIndoHighest) ? (
+                  <div className="bg-gradient-to-r from-amber-500/12 to-emerald-500/12 border border-amber-500/20 rounded-xl p-3 space-y-2">
+                    <div className="flex items-center gap-1.5">
+                      <Sparkles className="w-4 h-4 text-amber-400 animate-pulse shrink-0" />
+                      <h5 className="text-[9px] font-extrabold text-amber-300 uppercase tracking-widest">
+                        PRESTASI LUAR BIASA!
+                      </h5>
+                    </div>
+                    <div className="space-y-1.5 text-[10.5px] leading-relaxed text-slate-200">
+                      {isMatHighest && (
+                        <div className="bg-amber-950/30 border border-amber-900/30 p-2.5 rounded-lg flex items-start gap-2">
+                          <Award className="w-4 h-4 text-amber-400 shrink-0 mt-0.5" />
+                          <p className="font-bold text-amber-100">
+                            Selamat kamu peraih nilai matematika tertinggi di SD Negeri Leuwigajah 3
+                          </p>
+                        </div>
+                      )}
+                      {isIndoHighest && (
+                        <div className="bg-emerald-950/30 border border-emerald-900/30 p-2.5 rounded-lg flex items-start gap-2">
+                          <Award className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
+                          <p className="font-bold text-emerald-100">
+                            Selamat kamu peraih nilai bahasa Indonesia tertinggi di SD Negeri Leuwigajah 3
+                          </p>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                ) : (
+                  <div className="p-2.5 bg-slate-950/40 border border-slate-900/80 rounded-xl flex items-center gap-2">
+                    <Sparkles className="w-3.5 h-3.5 text-sky-400 shrink-0" />
+                    <span className="text-[9.5px] text-slate-400 leading-normal font-bold">
+                      Terus tingkatkan belajarmu! Setiap usaha adalah bagian penting untuk mengukir masa depan terbaikmu.
+                    </span>
+                  </div>
+                )}
+              </motion.div>
+            )}
 
             {/* Actions: Export PDF & Print HTML in New Tab */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-3 pb-1" id="private-actions-group">
