@@ -302,7 +302,7 @@ export default function AdminPortal() {
                 </div>
                 <div className="text-left">
                   <span className="text-xs font-bold block">Unduh Format Excel (DKHTKA)</span>
-                  <span className="text-[9px] text-emerald-500 font-extrabold uppercase">Sesuai Format Resmi Sekolah (.xls)</span>
+                  <span className="text-[9px] text-emerald-500 font-extrabold uppercase">Sesuai Format Resmi Sekolah (.xlsx)</span>
                 </div>
               </div>
               <FileDown className="w-4 h-4 text-emerald-400 shrink-0" />
